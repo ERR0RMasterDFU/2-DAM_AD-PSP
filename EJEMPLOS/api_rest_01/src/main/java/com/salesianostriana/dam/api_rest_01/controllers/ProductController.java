@@ -1,5 +1,11 @@
-package com.salesianostriana.dam.api_rest_01;
+package com.salesianostriana.dam.api_rest_01.controllers;
 
+import com.salesianostriana.dam.api_rest_01.dto.GetProductListDto;
+import com.salesianostriana.dam.api_rest_01.dto.createProductDto;
+import com.salesianostriana.dam.api_rest_01.models.Product;
+import com.salesianostriana.dam.api_rest_01.repositories.ProductRepository;
+import com.salesianostriana.dam.api_rest_01.services.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,46 +15,45 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product")
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductService productService;
 
-
-    @GetMapping("/list")
-    public ResponseEntity<List<Product>> getAllProducts(
+    @GetMapping
+    //public List<Product> getAll(
+    public GetProductListDto getAll(
             @RequestParam(required = false, value = "maxPrice", defaultValue = "-1") double max,
             @RequestParam(required = false, value = "sort", defaultValue = "no") String sortDirection
     ) {
-        //List<Product> result = productRepository.getAllProducts();
-        List<Product> result = productRepository.query(max, sortDirection);
-
-        if(result.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(result);
+        return GetProductListDto.of(productService.query(max, sortDirection));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable long id) {
-        return ResponseEntity.of(productRepository.getProduct(id));
+    public Product getById(@PathVariable Long id) {
+        return productService.get(id);
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.addProduct(product));
+    public ResponseEntity<Product> create(@RequestBody createProductDto product) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(productService.add(product.toProduct()));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> editProduct(@RequestBody Product product, @PathVariable long id) {
-        return ResponseEntity.of(productRepository.editProduct(id, product));
+    public Product edit(
+            @RequestBody Product product,
+            @PathVariable("id") Long productId) {
+
+        return productService.edit(productId, product);
+
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> deleteProductById(@PathVariable long id) {
-        productRepository.deleteProduct(id);
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        productService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
 
 }

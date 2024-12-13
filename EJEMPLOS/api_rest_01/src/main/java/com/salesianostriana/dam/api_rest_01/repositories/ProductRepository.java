@@ -1,45 +1,50 @@
-package com.salesianostriana.dam.api_rest_01;
+package com.salesianostriana.dam.api_rest_01.repositories;
 
+import com.salesianostriana.dam.api_rest_01.models.Product;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Repository
 public class ProductRepository {
 
     private final HashMap<Long, Product> products = new HashMap<>();
+    private final AtomicLong counter = new AtomicLong(0);
 
+    @PostConstruct
     public void init() {
-        addProduct(Product.builder().id(1L).name("Gorra de mario").price(200.0).build());
-        addProduct(Product.builder().id(2L).name("Espada Maestra").price(400.0).build());
-        addProduct(Product.builder().id(3L).name("Falchion").price(600.0).build());
-        addProduct(Product.builder().id(4L).name("Varita estelar").price(800.0).build());
-        addProduct(Product.builder().id(5L).name("Látigo 'Matavampiros'").price(1000.0).build());
+        add(Product.builder().id(1L).name("Laptop").price(1200.0).build());
+        add(Product.builder().id(2L).name("Smartphone").price(800.0).build());
+        add(Product.builder().id(3L).name("Headphones").price(150.0).build());
+        add(Product.builder().id(4L).name("Monitor").price(300.0).build());
+        add(Product.builder().id(5L).name("Keyboard").price(50.0).build());
     }
 
-    public Product addProduct(Product product) {
-        products.put(product.getId(), product);
+    public Product add(Product product) {
+        products.put(counter.incrementAndGet(), product);
         return product;
     }
 
-    public Optional<Product> getProduct(long id) {
+    public Optional<Product> get(Long id) {
         return Optional.ofNullable(products.get(id));
     }
 
-    public List<Product> getAllProducts() {
+    public List<Product> getAll() {
         return List.copyOf(products.values());
     }
 
-    Optional<Product> editProduct(Long id, Product newProductValue) {
+    public Optional<Product> edit(Long id, Product newValue) {
         return Optional.ofNullable(products.computeIfPresent(id, (k, v) -> {
-            v.setName(newProductValue.getName());
-            v.setPrice(newProductValue.getPrice());
+            v.setName(newValue.getName());
+            v.setPrice(newValue.getPrice());
             return v;
         }));
     }
 
-    public void deleteProduct(Long id) {
+    public void delete(Long id) {
         products.remove(id);
     }
 
@@ -63,5 +68,4 @@ public class ProductRepository {
 
         return Collections.unmodifiableList(result);
     }
-
 }
