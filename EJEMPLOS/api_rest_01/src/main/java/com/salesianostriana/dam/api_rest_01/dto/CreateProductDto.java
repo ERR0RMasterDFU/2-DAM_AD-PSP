@@ -4,7 +4,7 @@ import com.salesianostriana.dam.api_rest_01.models.Product;
 
 import java.util.List;
 
-public record createProductDto (
+public record CreateProductDto(
         String name,
         double price
 ) {
@@ -13,8 +13,7 @@ public record createProductDto (
         return new GetProductListDto((long) items.size(), items);
     }
 
-    public Product to() {
+    public Product toProduct() {
         return new Product(null, this.name, this.price);
     }
-
 }

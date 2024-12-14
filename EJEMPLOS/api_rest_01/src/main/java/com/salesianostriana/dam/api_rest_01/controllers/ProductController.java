@@ -1,17 +1,13 @@
 package com.salesianostriana.dam.api_rest_01.controllers;
 
 import com.salesianostriana.dam.api_rest_01.dto.GetProductListDto;
-import com.salesianostriana.dam.api_rest_01.dto.createProductDto;
+import com.salesianostriana.dam.api_rest_01.dto.CreateProductDto;
 import com.salesianostriana.dam.api_rest_01.models.Product;
-import com.salesianostriana.dam.api_rest_01.repositories.ProductRepository;
 import com.salesianostriana.dam.api_rest_01.services.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/product")
@@ -35,7 +31,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> create(@RequestBody createProductDto product) {
+    public ResponseEntity<Product> create(@RequestBody CreateProductDto product) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(productService.add(product.toProduct()));
     }
