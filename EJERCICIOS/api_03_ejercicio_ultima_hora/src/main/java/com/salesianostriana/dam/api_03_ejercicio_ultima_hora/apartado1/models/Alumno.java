@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.api_03_ejercicio_ultima_hora.alumno.models;
+package com.salesianostriana.dam.api_03_ejercicio_ultima_hora.apartado1.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
