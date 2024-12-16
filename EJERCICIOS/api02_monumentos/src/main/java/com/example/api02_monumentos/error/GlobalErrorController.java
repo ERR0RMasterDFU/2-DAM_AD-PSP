@@ -14,14 +14,25 @@ public class GlobalErrorController extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(MonumentNotFoundException.class)
     public ProblemDetail handleMonumentNotFound(MonumentNotFoundException ex) {
-        ProblemDetail result = ProblemDetail
-                .forStatusAndDetail(HttpStatus.NOT_FOUND,
-                        ex.getMessage());
-        result.setTitle("Monumento no encontrado");
-        result.setType(URI.create("https://www.salesianos-triana.edu/errors/product-not-found"));
-        result.setProperty("author", "David");
+        ProblemDetail exception = ProblemDetail
+                .forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
+        exception.setTitle("Monumento no encontrado");
+        exception.setType(URI.create("https://www.salesianos-triana.edu/errors/monument-not-found"));
+        exception.setProperty("author", "David");
 
-        return result;
+        return exception;
+
+    }
+
+    @ExceptionHandler(MonumentBadRequestException.class)
+    public ProblemDetail handleMonumentBadRequest(MonumentBadRequestException ex) {
+        ProblemDetail exception = ProblemDetail
+                .forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
+        exception.setTitle("Datos sin procesar");
+        exception.setType(URI.create("https://www.salesianos-triana.edu/errors/monument-bad-request"));
+        exception.setProperty("author", "David");
+
+        return exception;
 
     }
 
