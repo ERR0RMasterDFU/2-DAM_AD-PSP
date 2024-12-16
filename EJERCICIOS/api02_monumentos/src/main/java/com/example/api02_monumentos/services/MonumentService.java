@@ -1,5 +1,6 @@
 package com.example.api02_monumentos.services;
 
+import com.example.api02_monumentos.error.MonumentNotFoundException;
 import com.example.api02_monumentos.models.Monument;
 import com.example.api02_monumentos.repositories.MonumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,28 +21,26 @@ public class MonumentService {
         return monuRepo.save(m);
     }
 
-    public Optional<Monument> getMonument(long id) {
-        return monuRepo.findById(id);
+    public Monument getMonument(long id) {
+        return monuRepo.findById(id).orElseThrow(() -> new MonumentNotFoundException(id));
     }
 
     /*public List<Monument> getAllMonuments() {
         return List.copyOf(monuRepo.findAll());
     }*/
 
-    public Optional<Monument> editMonument(Monument m, long id) {
+    public Monument editMonument(Monument m, long id) {
 
         Monument nuevo = null;
-        Optional<Monument> old = this.getMonument(id);
+        Monument old = this.getMonument(id);
 
-        if(old.isPresent()) {
-            nuevo = old.get();
+        if(this.getMonument(id).equals()) {
             nuevo = monuRepo.save(m);
-            return Optional.of(nuevo);
+            return nuevo;
         } else {
-
+            return this.getMonument(id).orElseThrow(() -> new MonumentNotFoundException(id));
         }
 
-        return Optional.of(m);
     }
 
     public void deleteMonument(Long id) {

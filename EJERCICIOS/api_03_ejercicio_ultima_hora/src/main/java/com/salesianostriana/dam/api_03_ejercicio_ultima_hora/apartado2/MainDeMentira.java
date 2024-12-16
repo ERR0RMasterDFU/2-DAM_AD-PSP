@@ -4,12 +4,14 @@ import com.salesianostriana.dam.api_03_ejercicio_ultima_hora.apartado2.dto.Produ
 import com.salesianostriana.dam.api_03_ejercicio_ultima_hora.apartado2.models.Categoria;
 import com.salesianostriana.dam.api_03_ejercicio_ultima_hora.apartado2.models.Producto;
 import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
+//@Component
 public class MainDeMentira {
 
-    @PostConstruct
+    /*@PostConstruct
     public void init() {
 
         Categoria hortalizas = Categoria.builder()
@@ -29,5 +31,5 @@ public class MainDeMentira {
 
         ProductoDto producto = ProductoDto.toProductoDto(p);
 
-    }
+    }*/
 }

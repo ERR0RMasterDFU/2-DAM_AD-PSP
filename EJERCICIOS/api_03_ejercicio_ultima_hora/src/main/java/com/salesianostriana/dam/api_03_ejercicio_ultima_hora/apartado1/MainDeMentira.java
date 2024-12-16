@@ -4,12 +4,13 @@ import com.salesianostriana.dam.api_03_ejercicio_ultima_hora.apartado1.dto.Alumn
 import com.salesianostriana.dam.api_03_ejercicio_ultima_hora.apartado1.models.Alumno;
 import com.salesianostriana.dam.api_03_ejercicio_ultima_hora.apartado1.models.Curso;
 import com.salesianostriana.dam.api_03_ejercicio_ultima_hora.apartado1.models.Direccion;
-
 import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Component;
 
+//@Component
 public class MainDeMentira {
 
-    @PostConstruct
+    /*@PostConstruct
     public void init() {
 
         Direccion direccion = Direccion.builder()
@@ -20,7 +21,7 @@ public class MainDeMentira {
             .cp(32786)
             .poblacion(104578)
             .provincia("Ourense")
-        .build();
+            .build();
 
         Curso curso = Curso.builder()
             .id(1L)
@@ -28,7 +29,7 @@ public class MainDeMentira {
             .tipo("Bachillerato")
             .tutor("Luis Miguel López Magaña")
             .aula("303")
-        .build();
+            .build();
 
         Alumno a = Alumno.builder()
             .id(1L)
@@ -39,10 +40,12 @@ public class MainDeMentira {
             .email("carreton.huevero@gmail.com")
             .direccion(direccion)
             .curso(curso)
-        .build();
+            .build();
+
 
         AlumnoDto alumno = AlumnoDto.toAlumnoDto(a);
 
-    }
+        System.out.println(alumno);
 
+    }*/
 }
