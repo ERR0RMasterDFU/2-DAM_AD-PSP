@@ -1,0 +1,1 @@
+INSERT INTO Producto (nombre, descripcion, precio, id) VALUES ('COMP', 'Ordenador pórtatil con forma de guante que permite invocar y guardar demonios', 366.66, 1.0, nextval ('producto_seq'));
