@@ -17,7 +17,8 @@ import java.util.Objects;
 //@Table(name = "productos")
 public class Product {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(length = 4000)
@@ -31,6 +32,8 @@ public class Product {
     @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name = "fk_producto_categoria"))
     private Category categoria;
 
+
+    // EQUALS Y HASH CODE -------------------------------------------------------------------------------------------
     
     @Override
     public final boolean equals(Object o) {

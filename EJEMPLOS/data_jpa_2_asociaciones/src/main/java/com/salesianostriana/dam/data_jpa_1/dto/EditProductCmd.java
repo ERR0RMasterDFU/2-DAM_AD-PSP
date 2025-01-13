@@ -1,12 +1,8 @@
 package com.salesianostriana.dam.data_jpa_1.dto;
 
-import com.salesianostriana.dam.data_jpa_1.models.Category;
-
-public record EditProductoCmd(
+public record EditProductCmd(
         String nombre,
         String descripcion,
         double precio,
         Long categoriaId
-) {
-
-}
+) { }

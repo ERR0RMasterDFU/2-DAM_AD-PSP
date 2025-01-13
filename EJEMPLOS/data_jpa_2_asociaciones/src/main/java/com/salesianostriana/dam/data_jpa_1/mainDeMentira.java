@@ -12,7 +12,7 @@ public class mainDeMentira {
 
     private final ProductRepository productRepository;
 
-    @PostConstruct
+    /*@PostConstruct
     public void run() {
 
         Product p = Product.builder()
@@ -22,5 +22,5 @@ public class mainDeMentira {
                 .build();
 
         productRepository.save(p);
-    }
+    }*/
 }

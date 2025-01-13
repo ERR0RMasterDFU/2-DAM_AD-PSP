@@ -1,12 +1,12 @@
 package com.salesianostriana.dam.data_jpa_1.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -22,12 +22,15 @@ public class Category {
     @GeneratedValue
     private Long id;
 
-    /*@Column(length = 4000)
-    //@Column(columnDefinition = "text")
-    private String descripcion;*/
-
     private String nombre;
 
+    @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
+    @Builder.Default
+    @JsonIgnore
+    private List<Product> productos = new ArrayList<>();
+
+
+    // EQUALS Y HASH CODE -------------------------------------------------------------------------------------------
 
     @Override
     public final boolean equals(Object o) {

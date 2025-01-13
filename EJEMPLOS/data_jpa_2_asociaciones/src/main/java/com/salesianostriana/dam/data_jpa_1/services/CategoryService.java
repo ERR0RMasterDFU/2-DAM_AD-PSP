@@ -10,20 +10,15 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class categoryService {
+public class CategoryService {
 
     private final CategoryRepository repo;
 
 
     public List<Category> findAll() {
-        /*
-            Obtener todos los productos
-            Si la lista está vacía
-                Lanzo excepción
-         */
         List<Category> result = repo.findAll();
         if (result.isEmpty())
-            throw new EntityNotFoundException("No hay categorías con esos criterios de búsqueda");
+            throw new EntityNotFoundException("No hay categorias con esos criterios de búsqueda");
         return result;
     }
 
@@ -51,4 +46,3 @@ public class categoryService {
     }
 
 }
-
