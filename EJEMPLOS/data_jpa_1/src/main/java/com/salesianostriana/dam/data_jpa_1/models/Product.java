@@ -15,7 +15,7 @@ import java.util.Objects;
 @ToString
 @Entity
 //@Table(name = "productos")
-public class Producto {
+public class Product {
 
     @Id @GeneratedValue
     private Long id;
@@ -35,7 +35,7 @@ public class Producto {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Producto producto = (Producto) o;
+        Product producto = (Product) o;
         return getId() != null && Objects.equals(getId(), producto.getId());
     }
 
