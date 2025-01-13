@@ -1,12 +1,14 @@
 package com.salesianostriana.dam.data_jpa_1.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
-//@Data
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,24 +16,19 @@ import java.util.Objects;
 @Builder
 @ToString
 @Entity
-//@Table(name = "productos")
-public class Product {
+public class Category {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
-    @Column(length = 4000)
+    /*@Column(length = 4000)
     //@Column(columnDefinition = "text")
-    private String descripcion;
+    private String descripcion;*/
 
     private String nombre;
-    private double precio;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name = "fk_producto_categoria"))
-    private Category categoria;
 
-    
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
@@ -47,4 +44,5 @@ public class Product {
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
+
 }
