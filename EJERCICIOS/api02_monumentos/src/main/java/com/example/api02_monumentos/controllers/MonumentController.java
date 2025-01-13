@@ -176,6 +176,6 @@ public class MonumentController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Monument> deleteMonumentById(@PathVariable long id) {
         monuServ.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
