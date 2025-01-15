@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.data_jpa_1.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -30,6 +31,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id", foreignKey = @ForeignKey(name = "fk_producto_categoria"))
+    //@JsonBackReference - SÍ SE MUESTRA (LUISMI NO LO RECOMIENDA, PARA ESO ESTÁN LOS DTO)
     private Category categoria;
 
 

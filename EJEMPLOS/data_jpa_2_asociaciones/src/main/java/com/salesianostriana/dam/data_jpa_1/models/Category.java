@@ -27,7 +27,22 @@ public class Category {
     @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
     @Builder.Default
     @JsonIgnore
+    //@ToString.Exclude
+    //@JsonManagedReference - NO SE MUESTRA (LUISMI NO LO RECOMIENDA, PARA ESO ESTÁN LOS DTO)
     private List<Product> productos = new ArrayList<>();
+
+
+    // MÉTODOS HELPER -----------------------------------------------------------------------------------------------
+
+    public void addProducto (Product p) {
+        p.setCategoria(this);
+        productos.add(p);
+    }
+
+    public void removeProducto (Product p) {
+        productos.remove(p);
+        p.setCategoria(null);
+    }
 
 
     // EQUALS Y HASH CODE -------------------------------------------------------------------------------------------
