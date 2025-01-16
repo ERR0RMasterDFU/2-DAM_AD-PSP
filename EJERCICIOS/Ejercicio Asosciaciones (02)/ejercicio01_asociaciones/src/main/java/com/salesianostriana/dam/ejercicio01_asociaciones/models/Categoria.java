@@ -26,7 +26,7 @@ public class Categoria {
     @ToString.Exclude
     private Set<Producto> productos = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "categoriaMismaRelacion", fetch = FetchType.EAGER)
     @Builder.Default
     @ToString.Exclude
     private Set<Categoria> categorias = new HashSet<>();
