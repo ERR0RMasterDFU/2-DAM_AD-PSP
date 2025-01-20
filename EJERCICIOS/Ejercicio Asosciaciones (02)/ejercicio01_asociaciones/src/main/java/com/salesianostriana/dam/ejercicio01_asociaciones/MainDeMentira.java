@@ -24,12 +24,12 @@ public class MainDeMentira {
 
         Categoria vegetales = Categoria.builder()
                 .nombre("Vegetales")
-                .categoriaMismaRelacion(alimento)
+                .categoriaPadre(alimento)
                 .build();
 
         Categoria frutas = Categoria.builder()
                 .nombre("Frutas")
-                .categoriaMismaRelacion(alimento)
+                .categoriaPadre(alimento)
                 .build();
 
         categoriaRepository.save(alimento);

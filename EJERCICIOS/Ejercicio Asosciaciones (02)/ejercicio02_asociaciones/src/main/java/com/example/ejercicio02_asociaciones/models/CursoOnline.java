@@ -4,9 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -31,7 +32,7 @@ public class CursoOnline {
     @OneToMany(mappedBy = "curso", fetch = FetchType.EAGER)
     @Builder.Default
     @ToString.Exclude
-    private Set<Video> videos = new HashSet<>();
+    private List<Video> videos = new ArrayList<>();
 
     // HELPERS
 

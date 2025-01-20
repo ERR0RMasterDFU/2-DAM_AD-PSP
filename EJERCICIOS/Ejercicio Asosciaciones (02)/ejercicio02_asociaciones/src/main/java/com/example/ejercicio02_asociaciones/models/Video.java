@@ -13,6 +13,7 @@ import java.util.Objects;
 @Builder
 @ToString
 @Entity
+@IdClass(VideoPk.class)
 public class Video {
 
     @Id

@@ -24,16 +24,16 @@ public class Categoria {
     @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
     @Builder.Default
     @ToString.Exclude
-    private Set<Producto> productos = new HashSet<>();
+    private List<Producto> productos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "categoriaMismaRelacion", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "categoriaPadre", fetch = FetchType.EAGER)
     @Builder.Default
     @ToString.Exclude
-    private Set<Categoria> categorias = new HashSet<>();
+    private List<Categoria> listaCategoriasHijas = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name="categoria_relacion_id", foreignKey = @ForeignKey(name = "fk_categoria_categoria"))
-    private Categoria categoriaMismaRelacion;
+    @JoinColumn(name="categoria_padre_categoria_id", foreignKey = @ForeignKey(name = "fk_ccategoria_padre_categoria"))
+    private Categoria categoriaPadre;
 
 
     // MÉTODOS HELPER -----------------------------------------------------------------------------------------------
@@ -49,13 +49,13 @@ public class Categoria {
     }
 
     public void addCategoria (Categoria c) {
-        c.setCategoriaMismaRelacion(this);
-        categorias.add(c);
+        c.setCategoriaPadre(this);
+        listaCategoriasHijas.add(c);
     }
 
     public void removeProducto (Categoria c) {
-        categorias.remove(c);
-        c.setCategoriaMismaRelacion(null);
+        listaCategoriasHijas.remove(c);
+        c.setCategoriaPadre(null);
     }
 
 

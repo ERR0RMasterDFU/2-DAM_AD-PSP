@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -31,7 +29,7 @@ public class Profesor {
             orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
-    private Set<CursoOnline> cursos = new HashSet<>();
+    private List<CursoOnline> cursos = new ArrayList<>();
 
 
     // HELPERS
