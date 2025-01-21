@@ -45,26 +45,25 @@ public class Estacion {
 
 
     // HELPERS
-    private void addBicicleta (Bicicleta b) {
+    public void addBicicleta (Bicicleta b) {
         b.setEstacion(this);
         this.bicicletas.add(b);
     }
 
-    private void removeBicicleta (Bicicleta b) {
+    public void removeBicicleta (Bicicleta b) {
         this.bicicletas.remove(b);
         b.setEstacion(null);
     }
 
-    private void addEstacion (Uso u) {
+    public void addUso (Uso u) {
         u.setEstacion(this);
         this.usos.add(u);
     }
 
-    private void removeEstacion (Uso u) {
-        this.bicicletas.remove(u);
+    public void removeUso (Uso u) {
+        this.usos.remove(u);
         u.setEstacion(null);
     }
-
 
 
     @Override

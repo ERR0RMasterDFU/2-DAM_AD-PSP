@@ -32,19 +32,19 @@ public class Bicicleta {
     @ToString.Exclude
     private List<Uso> usos = new ArrayList<>();
 
-
     // ASOCIACIÓN CON ESTACIÓN
     @ManyToOne
     @JoinColumn(name = "estacion_id", foreignKey = @ForeignKey(name = "fk_bicicleta_estacion"))
     private Estacion estacion;
 
+
     // HELPERS
-    private void addUso (Uso u) {
+    public void addUso (Uso u) {
         u.setBicicleta(this);
         this.usos.add(u);
     }
 
-    private void removeUso (Uso u) {
+    public void removeUso (Uso u) {
         this.usos.remove(u);
         u.setBicicleta(null);
     }

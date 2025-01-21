@@ -28,7 +28,7 @@ public class Usuario {
     // ASOCIACIÓN CON USO
     @OneToMany(mappedBy = "usuario",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
+            //cascade = CascadeType.ALL,
             orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
@@ -36,12 +36,12 @@ public class Usuario {
 
 
     // HELPERS
-    private void addUso (Uso u) {
+    public void addUso (Uso u) {
         u.setUsuario(this);
         this.usos.add(u);
     }
 
-    private void removeUso (Uso u) {
+    public void removeUso (Uso u) {
         this.usos.remove(u);
         u.setUsuario(null);
     }
