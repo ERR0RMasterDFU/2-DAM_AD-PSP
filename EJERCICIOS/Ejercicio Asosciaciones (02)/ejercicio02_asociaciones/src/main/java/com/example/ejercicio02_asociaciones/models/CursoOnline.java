@@ -5,7 +5,6 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,10 +25,13 @@ public class CursoOnline {
     private double puntuacion;
 
     @ManyToOne
-    @JoinColumn(name = "profesor_id", foreignKey = @ForeignKey(name = "fk_curso_profesor"))
+    @JoinColumn(name = "profesor_id", foreignKey = @ForeignKey(name = "fk_curso_online_profesor"))
     private Profesor profesor;
 
-    @OneToMany(mappedBy = "curso", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "curso",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
     private List<Video> videos = new ArrayList<>();
@@ -43,7 +45,7 @@ public class CursoOnline {
 
     private void removeVideo (Video v) {
         this.videos.remove(v);
-        v.setCurso(this);
+        v.setCurso(null);
     }
 
     @Override

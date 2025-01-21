@@ -20,14 +20,15 @@ public class Video {
     @GeneratedValue
     private Long id;
 
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "curso_id", foreignKey = @ForeignKey(name = "fk_video_curso"))
+    private CursoOnline curso;
+
     private int orden;
     private String titulo;
     private String descripcion;
     private  String url;
-
-    @ManyToOne
-    @JoinColumn(name = "curso_id", foreignKey = @ForeignKey(name = "fk_video_curso"))
-    private CursoOnline curso;
 
 
     @Override
