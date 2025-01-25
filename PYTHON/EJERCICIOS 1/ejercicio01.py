@@ -27,7 +27,7 @@ listaConversion = {
     "T":"-",
     "U":"..-",
     "V":"...-",
-    "w":".--",
+    "W":".--",
     "X":"-..-",
     "Y":"-.--",
     "Z":"--..",
@@ -71,9 +71,10 @@ else:
         for conversion in listaConversion:            
             if(simbolo == conversion):
                 if(simbolo == " "):
-                    listaTextoConvertido.append(listaConversion.get(simbolo))
+                    listaTextoConvertido.append(" ")
                 else:
                     listaTextoConvertido.append(listaConversion.get(simbolo))
                     listaTextoConvertido.append(" ")
 
     print("\nTRADUCCIÓN EN MORSE: " + delimitador.join(listaTextoConvertido))
+    
