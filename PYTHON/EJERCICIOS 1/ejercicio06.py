@@ -52,7 +52,7 @@ while True:
                    "\nV - Ver elementos comunes de los dos array." +
                    "\nF - Ver elementos NO comunes de los dos array.\n")
     
-    if strBoleano.upper() == "V" or strBoleano.upper() == "F":
+    if(strBoleano.upper() == "V" or strBoleano.upper() == "F"):
         break
     else:
         print("\n\nPor favor, elija una de los dos opciones disponibles.")
