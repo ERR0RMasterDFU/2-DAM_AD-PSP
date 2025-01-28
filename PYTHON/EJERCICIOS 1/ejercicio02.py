@@ -5,8 +5,57 @@
     # Expresión balanceada: { [ a * ( c + d ) ] - 5 }
     # Expresión no balanceada: { a * ( c + d ) ] - 5 }
 
+def comprobarBalanceExpresion (listaCaracteres):
 
-expresion = input("Introduce una expresión para comprobar si está balanceada o no.")
+    listaDelimitadores = list()
+    pilaDelimitadores = list()
+
+    for var in listaCaracteres:
+        if(var == "[" or var == "]" 
+           or var == "(" or var == ")" 
+           or var == "{" or var == "}"):
+            
+            listaDelimitadores.append(var)
+
+    #print(listaDelimitadores)
+
+    for i, valor in enumerate(listaDelimitadores):
+        if(valor == "["):
+            pilaDelimitadores.append("]")
+        elif (valor == "{"):
+            pilaDelimitadores.append("}")
+        elif (valor == "("):
+            pilaDelimitadores.append(")")
+        
+        if(valor == "]"):
+            if(valor == pilaDelimitadores[len(pilaDelimitadores)-1]):
+                pilaDelimitadores.pop(len(pilaDelimitadores)-1)
+            else:
+                break
+        elif(valor == "}"):
+            if(valor == pilaDelimitadores[len(pilaDelimitadores)-1]):
+                pilaDelimitadores.pop(len(pilaDelimitadores)-1)
+            else:
+                break
+        elif(valor == ")"):
+            if(valor == pilaDelimitadores[len(pilaDelimitadores)-1]):
+                pilaDelimitadores.pop(len(pilaDelimitadores)-1)
+            else:
+                break
 
 
+    if(listaDelimitadores):
+        if(not pilaDelimitadores):
+            print("\nLa expresión introducida está BALANCEADA.")
+        else:
+            print("\nLa expresión introducida NO está balanceada.")
+    else:
+        print("\nLa expresión introducida carece de delimitadores.")
 
+#---------------------------------------------------------------------------------------------------------------------
+
+expresion = input("Introduzca la expresión que desee:\n")
+
+listaCaracteres = list(expresion)
+
+comprobarBalanceExpresion(listaCaracteres)

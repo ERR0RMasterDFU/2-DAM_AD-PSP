@@ -24,14 +24,13 @@ def recogerElementosDeArray(booleano, array1, array2):
                 if(elemento1 == elemento2):
                     if(elemento1 not in array3):    
                         array3.append(elemento1)
-    else:
+    else:    
         for elemento1 in array1:
-            for elemento2 in array2:
-                if(elemento1 == elemento2):    
-                    array1.remove(elemento1)
-                    array2.remove(elemento2)
-    
-        array3 = array1 + array2
+            if elemento1 not in array2:
+                array3.append(elemento1)
+        for elemento2 in array2:
+            if elemento2 not in array1:
+                array3.append(elemento2)
 
     return array3
 
