@@ -1,5 +1,5 @@
 # EJERCICIO 1
-# Utilizando el fichero notas.csv, realiza un programa en python que lea los datos de ese 
+# Utilizando el fichero notas.txt, realiza un programa en python que lea los datos de ese 
 # fichero y construya la siguiente estructura:
 
     # alumnos = [ 
@@ -14,4 +14,10 @@
     # Pide un curso y muestre el porcentaje de aprobados por cada asignatura.
     # Pide un curso, y crea un fichero nombredelcurso.txt con los alumnos y la nota media.
 
+notas_file = open("EJERCICIOS INTERMEDIOS/Ficheros/ejercicio01/notas.txt", "r+", encoding="utf-8")
 
+contenido_txt = notas_file.read()
+
+print(contenido_txt)
+
+notas_file
