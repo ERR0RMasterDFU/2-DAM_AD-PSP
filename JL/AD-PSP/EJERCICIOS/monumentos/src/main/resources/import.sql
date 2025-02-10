@@ -1,0 +1,8 @@
+-- MONUMENTOS -----------------------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO monumento (id, nombre_pais, nombre_ciudad, latitud, longitud, nombre_monumento, descripcion, foto) VALUES (1, 'España', 'Bilbao', '43°15′45″ N', '2°55′31″ O', 'Puppy', 'Perrito muy alegre hecho de flores.', 'https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/27/a5/f3.jpg');
+INSERT INTO monumento (id, nombre_pais, nombre_ciudad, latitud, longitud, nombre_monumento, descripcion, foto) VALUES (2, 'Francia', 'París', '48°51′12.24″ N', '2°20′54.96″ E', 'Torre Eiffel', 'Es una construcción de hierro de 300 metros de altura que fue creada para la Exposición Universal de París de 1889.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Eiffelturm.JPG/280px-Eiffelturm.JPG');
+INSERT INTO monumento (id, nombre_pais, nombre_ciudad, latitud, longitud, nombre_monumento, descripcion, foto) VALUES (3, 'México', 'Ciudad de México', '19°25′42.49″ N', '99°7′39.58″ 0', 'Ángel de la Independencia', 'La estatua de bronce de un león gigante con un niño de Rivas Mercado, simboliza al pueblo mexicano “fuerte en la guerra y dócil en la paz.”', 'https://i0.wp.com/historico.alcaldiacuauhtemoc.mx/wp-content/uploads/2020/01/cuauchtemocAngel-de-la-Independencia-destacada.jpg?fit=528%2C453&ssl=1');
+
+
+ALTER SEQUENCE monumento_seq RESTART WITH 53;
