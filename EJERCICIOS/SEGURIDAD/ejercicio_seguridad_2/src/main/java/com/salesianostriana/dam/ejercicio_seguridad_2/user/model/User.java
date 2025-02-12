@@ -19,24 +19,25 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Entity
-@Table(name="user_entity")
-@EntityListeners(AuditingEntityListener.class)
+
 @Getter
 @Setter
-@ToString
-@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+//@ToString
+@Entity
+@Table(name="user_entity")
+//@EntityListeners(AuditingEntityListener.class)
+//@RequiredArgsConstructor
 public class User implements UserDetails {
 
     // Usamos UUID como ID de los usuarios
     // Se utiliza la estrategia de generación basada en IP y fecha.
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
+    @GeneratedValue(strategy = GenerationType.UUID)
+    /*@GenericGenerator(
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator",
             parameters = {
@@ -46,7 +47,7 @@ public class User implements UserDetails {
                     )
             }
     )
-    @Column(columnDefinition = "uuid")
+    @Column(columnDefinition = "uuid")*/
     private UUID id;
 
     @NaturalId
@@ -59,6 +60,19 @@ public class User implements UserDetails {
 
     private String fullName;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<UserRole> roles;
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream()
+                .map(role -> "ROLE_" + role)
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toSet());
+    }
+
+/*
     @Builder.Default
     private boolean accountNonExpired = true;
     @Builder.Default
@@ -67,9 +81,8 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
     @Builder.Default
     private boolean enabled = true;
+*/
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<UserRole> roles;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -79,13 +92,7 @@ public class User implements UserDetails {
 
 
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> "ROLE_" + role)
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-    }
+
 
     @Override
     public String getPassword() {
