@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.ejercicio_seguridad_2.security;
 
+import com.salesianostriana.dam.ejercicio_seguridad_2.security.exceptionhandling.JwtAuthenticationEntryPoint;
 import com.salesianostriana.dam.ejercicio_seguridad_2.security.jwt.access.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,7 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean
     AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
@@ -57,6 +59,8 @@ public class SecurityConfig {
         http.cors(Customizer.withDefaults());
         http.sessionManagement((session) -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.exceptionHandling(excepz -> excepz
+                .authenticationEntryPoint(authenticationEntryPoint));
         http.authorizeHttpRequests(authz -> authz
                 .requestMatchers(HttpMethod.POST, "/auth/register", "/auth/login").permitAll()
                 .anyRequest().authenticated());
