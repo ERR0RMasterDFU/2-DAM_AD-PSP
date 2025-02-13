@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.ejercicio_seguridad_2.security;
 
+import com.salesianostriana.dam.ejercicio_seguridad_2.security.exceptionhandling.JwtAccessDeniedHandler;
 import com.salesianostriana.dam.ejercicio_seguridad_2.security.exceptionhandling.JwtAuthenticationEntryPoint;
 import com.salesianostriana.dam.ejercicio_seguridad_2.security.jwt.access.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,6 +29,7 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+    private final JwtAccessDeniedHandler accessDeniedHandler;
 
     @Bean
     AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
@@ -60,9 +63,12 @@ public class SecurityConfig {
         http.sessionManagement((session) -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.exceptionHandling(excepz -> excepz
-                .authenticationEntryPoint(authenticationEntryPoint));
+                .authenticationEntryPoint(authenticationEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler)
+        );
         http.authorizeHttpRequests(authz -> authz
                 .requestMatchers(HttpMethod.POST, "/auth/register", "/auth/login").permitAll()
+                .requestMatchers("/me/admin").hasRole("ADMIN")
                 .anyRequest().authenticated());
 
 
@@ -70,9 +76,5 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-
-
-
 
 }

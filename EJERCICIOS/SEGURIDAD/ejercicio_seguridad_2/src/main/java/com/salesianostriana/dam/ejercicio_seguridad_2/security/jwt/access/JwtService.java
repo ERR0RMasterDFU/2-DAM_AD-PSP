@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.ejercicio_seguridad_2.security.jwt.access;
 
+import com.salesianostriana.dam.ejercicio_seguridad_2.security.exceptionhandling.JwtException;
 import com.salesianostriana.dam.ejercicio_seguridad_2.user.model.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -37,7 +38,7 @@ public class JwtService {
         secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes());
 
         jwtParser = Jwts.parser()
-                .verifyWith(secretKey)
+                .setSigningKey(secretKey)
                 .build();
 
     }
@@ -81,5 +82,4 @@ public class JwtService {
         }
 
     }
-
 }
