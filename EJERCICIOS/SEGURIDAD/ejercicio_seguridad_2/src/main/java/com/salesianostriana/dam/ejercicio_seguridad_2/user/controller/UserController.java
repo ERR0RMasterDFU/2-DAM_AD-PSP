@@ -2,6 +2,7 @@ package com.salesianostriana.dam.ejercicio_seguridad_2.user.controller;
 
 import com.salesianostriana.dam.ejercicio_seguridad_2.security.jwt.access.JwtService;
 import com.salesianostriana.dam.ejercicio_seguridad_2.security.jwt.refresh.RefreshToken;
+import com.salesianostriana.dam.ejercicio_seguridad_2.security.jwt.refresh.RefreshTokenRequest;
 import com.salesianostriana.dam.ejercicio_seguridad_2.security.jwt.refresh.RefreshTokenService;
 import com.salesianostriana.dam.ejercicio_seguridad_2.user.dto.CreateUserRequest;
 import com.salesianostriana.dam.ejercicio_seguridad_2.user.dto.LoginRequest;
@@ -64,6 +65,16 @@ public class UserController {
                 .body(UserResponse.of(user, accessToken, refreshToken.getToken()));
 
     }
+
+    @PostMapping("/auth/refresh/token")
+    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest req) {
+        String token = req.refreshToken();
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(refreshTokenService.refreshToken(token));
+
+    }
+
 
     @GetMapping("/me")
     public UserResponse me(@AuthenticationPrincipal User user) {
