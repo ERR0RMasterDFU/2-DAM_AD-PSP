@@ -24,8 +24,6 @@ public class VerificationToken {
     @OneToOne
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
-    @Column(nullable = false, unique = true)
-    private String token;
 
     @Column(nullable = false)
     private Instant expireAt;

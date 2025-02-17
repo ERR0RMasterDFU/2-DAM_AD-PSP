@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +44,7 @@ public class VerificationTokenService {
     }
 
     public Optional<VerificationToken> findByToken(String token) {
-        return verificationTokenRepository.findByToken(token);
+        return verificationTokenRepository.findById(UUID.fromString(token));
     }
 
 }

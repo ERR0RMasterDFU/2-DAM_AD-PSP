@@ -23,6 +23,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -34,6 +36,8 @@ public class UserController {
     private final VerificationTokenService verificationTokenService;
     private final EmailService emailService;
 
+
+    // VERIFICACIÓN POR CORREO ELECTRÓNICO ---------------------------------------------------------------------------------------
 
     @PostMapping("/auth/register")
     public ResponseEntity<UserResponse> register(@RequestBody CreateUserRequest createUserRequest) {
@@ -48,13 +52,14 @@ public class UserController {
 
     @GetMapping("/auth/verify")
     public ResponseEntity<String> verifyAccount(@RequestParam String token) {
-        VerificationToken verificationToken = verificationTokenService.findByToken(token)
-                .orElseThrow(() -> new VerificationTokenException("Token de verificación inválido o caducado."));
+        Optional<VerificationToken> verificationToken = verificationTokenService.findByToken(token);
 
-        verificationTokenService.verifyToken(verificationToken);
+        verificationTokenService.verifyToken(verificationToken.get());
 
         return ResponseEntity.ok("Cuenta verificada con éxito!");
     }
+
+    // ---------------------------------------------------------------------------------------------------------------------------
 
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
@@ -92,7 +97,7 @@ public class UserController {
     }
 
 
-    // VERIFICACIÓN POR CORREO ELECTRÓNICO
+
 
 
 

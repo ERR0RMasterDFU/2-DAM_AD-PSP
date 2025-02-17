@@ -14,6 +14,5 @@ public interface VerificationTokenRepository extends JpaRepository<VerificationT
     @Transactional
     void deleteByUser(User user);
 
-    Optional<VerificationToken> findByToken(String token);
 
 }
